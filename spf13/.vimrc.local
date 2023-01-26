@@ -1,0 +1,86 @@
+" before ~/.vimrc.before.local
+    "let g:airline_powerline_fonts = 1
+    "let g:spf13_no_autochdir = 1
+
+" 统一
+    set t_Co=256                                " 有的场景下需要此设置
+    " set laststatus=2
+
+" 显示
+    colorscheme ir_black            " 设置主题
+
+    " vim-indent-guides：取消缩进白方格 https://www.zhihu.com/question/60911294
+    let g:indent_guides_enable_on_vim_startup = 0
+
+    " 不进行纠错，以免在注释中显示很多的 '补丁'；此配置无效 
+    " let g:loaded_litecorrect = 0  
+    
+    " 取消拼写检查，主要为了去掉注释区的高亮; 注意：要把 vimview 等文件夹都清理掉，否则这些文件还是使用是之前的配置
+    set nospell                     
+
+    " 中文乱码
+    set fileencodings=utf-8,gbk,utf-16le,cp1252,iso-8859-15,ucs-bom
+    set termencoding=utf-8
+    set encoding=utf-8
+    set termencoding=utf-8    
+
+" 状态栏
+    " let g:airline_powerline_fonts = 1             " 此处无效，必须在.vimrc.before，执行后在其他文件中有判断语句
+    let g:airline_theme = 'dark'                    " 修改显示的主题
+
+    let g:airline#extensions#tabline#buffer_nr_show = 1     " bufferline 每个文件前边显示数字比那好
+    let g:airline_section_b = ''                    " 不显示branch
+
+    " 文件不同时，默认会显示父目录，选择最简单的场景    
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+    " let g:airline#extensions#tabline#left_sep = ' '       "tabline中未激活buffer两端的分隔字符
+    " let g:airline#extensions#tabline#left_alt_sep = '|'   "tabline中buffer显示编号
+
+    " minibuf位置
+    "let g:airline#extensions#tabline#enabled = 1   " bufferline 在顶端显示
+    "let g:airline_section_c = ''                   " 不在底部显示 buffer line
+    
+" 编码
+    " ~/.bashrc，保持 iterm2 与目标系统的编码保持一致
+    " export LC_ALL=en_US.UTF-8           
+
+" 方便
+    " vimrc更新后，自动更新显示 ？
+    " if has("autocmd")
+    "     autocmd! bufwritepost vimrc source $MYVIMRC
+    " endif
+
+"==================================================================
+" 自定义
+    " make，~/.bashrc中：export DEV_HOME=
+    let @m=":cd $DEV_HOME/test/build\<CR>:make $DEV_BIN_NAME \<CR>\<CR>:cd $DEV_HOME/$DEV_SRC \<CR>:pwd\<CR>"
+    nmap <F5>  @m<cr>
+    nmap <F3> :cn<cr>
+    nmap <F4> :cp<cr>
+    
+    set tags +=$DEV_HOME/tags
+    let @t=":cd $DEV_HOME\<CR>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q \<CR>"
+    nmap <F9>  @t<cr>
+
+    let @c=":cd $DEV_HOME\<CR>:!cscope -Rbkq \<CR> :cs add $DEV_HOME \<CR>"
+    nmap <F10>  @c<cr>
+
+    if filereadable($DEV_HOME . "/cscope.out")
+        cs add $DEV_HOME                " echom "get it"
+    endif
+
+" 单独配置
+    " set noswapfile                      ” 配置只有，打开文件时显示为空白，需要多按回车
+    " set helplang=cn
+    " set showcmd
+    
+    " mac 下使用，能够直接复制
+    set clipboard=autoselect
+    
+    " 远程linux下设置为v, 否则无法复制
+    " set mouse=v
+
+    set wrap
+
+

@@ -1,0 +1,15 @@
+.vim
+.bash_history
+.vimrc
+.viminfo
+.marks
+.sudo_as_admin_successful
+*.swp
+*.log
+*.gdb/
+venv/
+.idea/
+__pycache__/
+.DS_Store
+.vim/
+.spf13*/
