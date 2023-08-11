@@ -74,13 +74,14 @@
     " set noswapfile                      ” 配置只有，打开文件时显示为空白，需要多按回车
     " set helplang=cn
     " set showcmd
-    
-    " mac 下使用，能够直接复制
-    set clipboard=autoselect
-    
-    " 远程linux下设置为v, 否则无法复制
-    " set mouse=v
+   
+    if has("mac")
+        " mac 下使用，能够直接复制
+        set clipboard=autoselect
+    else
+        " 远程linux下设置为v, 否则无法复制
+        set mouse=v
+    endif
 
     set wrap
-
 
